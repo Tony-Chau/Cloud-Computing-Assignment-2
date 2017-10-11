@@ -1,0 +1,25 @@
+{
+  "name": "twitterstream",
+  "version": "1.0.0",
+  "description": "cloud computing\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[i\u001b[C\u001b[C\u001b[C\u001b[Ccab\u001b[2~432\u001b[2~ cloud computing assignment 2",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tony-Chau/Cloud-Computing-Assignment-2.git"
+  },
+  "author": "Tony Chau & Allan Li",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tony-Chau/Cloud-Computing-Assignment-2/issues"
+  },
+  "homepage": "https://github.com/Tony-Chau/Cloud-Computing-Assignment-2#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "nodemon": "^1.12.1",
+    "pug": "^2.0.0-rc.4"
+  }
+}
