@@ -10,6 +10,8 @@ app.use(express.static(path.join(__dirname, 'views')));
 app.use(bodyParser.json());
 app.use(twitterRouter);
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.listen(3000, function(){
   console.log('Express app listening at http://localhost:3000/');
 });

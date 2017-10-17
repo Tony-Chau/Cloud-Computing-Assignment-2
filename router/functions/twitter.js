@@ -13,5 +13,7 @@ var client = new Twitter({
 //  });
 
  client.get('search/tweets', {q: '%40twitterapi', lang: 'en', count: 1000}, function(error, tweets, response) {
-    console.log(tweets);  
+    console.log(tweets);
   });
+
+  

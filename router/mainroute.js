@@ -6,7 +6,7 @@ const MongoServer = require('./functions/mongodb.js');
 
 router.get('/', function(req, res){
     res.render('index', {
-        Title: 'green'
+        Title: 'Twitter Hashtag Search'
     });
 });
 

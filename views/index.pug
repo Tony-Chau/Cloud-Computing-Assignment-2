@@ -1,1 +1,18 @@
-h1=Title
+extends layout
+
+block content  
+  h1 #{Title}
+  br
+  div  
+      form(action='/stream', method='post')
+        label(for='stream') Display live hashtag stream  
+        br
+        input#stream(type='text', name='stream')
+        input(type='submit', value='Search Stream')
+        br
+        br  
+      form(action='/graph', method='post')
+        label(for='graph') Display recent hashtag as a line graph   
+        br
+        input#graph(type='text', name='graph')
+        input(type='submit', value='Search Graph')
