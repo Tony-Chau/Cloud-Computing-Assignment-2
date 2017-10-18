@@ -5,21 +5,23 @@ var twitter = new Twit({
   access_token: '901995605249056768-GvylBUk69pnwaTHk57bfZiVSTuNBLlC',
   access_token_secret: 'bToRXg7TR7MylPex9kq3t3uJNgHGSeWMh8R5PAUH6FuLn'
 });
-
+const tool = require('./tools.js'); 
 
 
 module.exports = {
   search: function (req, res){
-    //var query = req.query.search;
-    //var query = '#' + query; //(or %20)
-    var query = 'Gordon Ramsay';
-    twitter.get('search/tweets', { q: query, count: 100 }, function(err, data, response) {
-      // var TwitterData = JSON.Parse(data);
-      console.log(data);
+    var query = req.query.q;
+    var query = '#' + query; //(or %23)
+    twitter.get('search/tweets', { q: query, count: 100, lang: 'en' }, function(err, data, response) {
+      //var TwitterData = JSON.parse(data);
+      //console.log(data);
+      var TwitterData = JSON.stringify(data);
       // res.render('index', {
       //   Title: 'Twitter Hashtag Search',
       //   data: data
       // });
+      TwitterData = JSON.parse(TwitterData);
+      res.send(TwitterData);
     });
   }
 }
