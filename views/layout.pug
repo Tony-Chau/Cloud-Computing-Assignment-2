@@ -3,7 +3,7 @@ html
   head
     title Twitter
   body  
-    nav(style="background-color:#1DA1F2;").navbar.navbar-inverse
+    nav(style="background-color:#1DA1F2;border-color:#1DA1F2;border-radius:0%;").navbar.navbar-inverse
       .container
         .navbar-header
           button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
@@ -18,7 +18,8 @@ html
               a(href='/' style='color:#FFFFFF') Home
     .container
       block content
-    script(src='/bower_components/jquery/dist/jquery.js')
-    script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
-    script(src='/views/assets/js/search.js')
-    link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css') 
+    //- script(src='public/bower_components/jquery/dist/jquery.js')
+    script(src='./public/bower_components/jquery/dist/jquery.js')
+    script(src='./public/bower_components/bootstrap/dist/js/bootstrap.js')
+    script(src='assets/js/search.js')
+    link(rel='stylesheet' href='./public/bower_components/bootstrap/dist/css/bootstrap.css') 
