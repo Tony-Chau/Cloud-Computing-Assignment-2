@@ -11,13 +11,15 @@ var twitter = new Twit({
 module.exports = {
   search: function (req, res){
     //var query = req.query.search;
-    var query = '#' + query; //(or %20)
-    twitter.get('search/tweets', { q: query }, function(err, data, response) {
-      var TwitterData = JSON.Parse(data);
-      res.render('index', {
-        Title: 'Twitter Hashtag Search',
-        data: data
-      });
+    //var query = '#' + query; //(or %20)
+    var query = 'Gordon Ramsay';
+    twitter.get('search/tweets', { q: query, count: 100 }, function(err, data, response) {
+      // var TwitterData = JSON.Parse(data);
+      console.log(data);
+      // res.render('index', {
+      //   Title: 'Twitter Hashtag Search',
+      //   data: data
+      // });
     });
   }
 }
