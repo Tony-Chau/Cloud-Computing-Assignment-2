@@ -4,6 +4,11 @@ $('.search-panel .dropdown-menu').find('a').click(function(e) {
 	var concept = $(this).text();
 	$('.search-panel span#search_hashtag').text(concept);
 	$('.input-group #search_param').val(param);
+
+	var menu = $('#menu').val();
+	if (menu == 'Graph' || 'Stream'){
+		$('#search').removeAttr('disabled');
+	}
 });
 
 function textCheck(){
@@ -17,9 +22,6 @@ function textCheck(){
 
 function submiter(){
 	var search_param = $('#search_param').val();
-	if (search_param == 'Search Hashtag'){
-		search_param = 'Search';
-	}
 	var link = '/' + search_param;
 	$('#FormSearch').attr('action', link);
 	$('#submits').click();

@@ -12,12 +12,10 @@ router.get('/', function(req, res){
 });
 
 router.get('/:search_param', function(req, res){
-  
+
   if (tool.isset(req.params.search_param)){
     var search_param = req.params.search_param;
-    if (search_param == 'Search'){
-      twitter.search(req, res);
-    }else if(search_param == 'Graph'){
+    if(search_param == 'Graph'){
       res.send(search_param);
     }else if (search_param == 'Stream'){
       res.send(search_param);
