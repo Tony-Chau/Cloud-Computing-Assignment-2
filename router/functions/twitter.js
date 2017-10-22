@@ -6,22 +6,30 @@ var twitter = new Twit({
   access_token_secret: 'bToRXg7TR7MylPex9kq3t3uJNgHGSeWMh8R5PAUH6FuLn'
 });
 const tool = require('./tools.js'); 
-
+const mysql = require('./mysql.js');
 
 module.exports = {
   search: function (req, res){
     var query = req.query.q;
     var query = '#' + query; //(or %23)
     twitter.get('search/tweets', { q: query, count: 100, lang: 'en' }, function(err, data, response) {
-      //var TwitterData = JSON.parse(data);
-      //console.log(data);
-      var TwitterData = JSON.stringify(data);
-      // res.render('index', {
-      //   Title: 'Twitter Hashtag Search',
-      //   data: data
-      // });
-      TwitterData = JSON.parse(TwitterData);
-      res.send(TwitterData);
+      var length = data.search_metadata.count;
+      var text = data.statuses[0].text;
+      var hashdata = [];
+      var twitterID = [length];
+      for (var i = 0; i < length; i += 1){
+        var number = i + 0;
+        var hash = data.statuses[i].entities.hashtags;
+        for (var j = 0; j < hash.length; j += 1){
+           hashdata.push(hash[j].text);
+         }
+        twitter[length] = i;
+      }
+      mysql.InsertHashTable(hashdata, twitterID);
+      //  console.log(hashdata);
+      // console.log(text);
+      //console.log(data.search_metadata.count);
+      res.send(hashdata);
     });
   }
 }
