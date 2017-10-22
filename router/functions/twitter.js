@@ -17,7 +17,6 @@ module.exports = {
       var text = data.statuses[0].text;
       var hashdata = [];
       var twitterID = [];
-      mysql.ResetHashTable();
       for (var i = 0; i < length; i += 1){
         if (tool.isset(data.statuses[i])){
           var hash = data.statuses[i].entities.hashtags; //This section here is a glitch where sometimes it works, but other times it doesn't

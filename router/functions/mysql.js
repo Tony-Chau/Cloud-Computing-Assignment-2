@@ -44,7 +44,7 @@ module.exports = {
             if (err){
                 throw err;
             }else{
-                var sql = 'TRUNUCATE tonychau_twitterstream.TwitterTable;';
+                var sql = 'TRUNCATE tonychau_twitterstream.TwitterTable;';
                 con.query(sql, function(err){
                     if (err){
                         throw err;
@@ -73,11 +73,10 @@ module.exports = {
             if (err){
                 throw err;
             }else{
-                // var reset = 'TRUNUCATE tonychau_twitterstream.HashTable;';
-                // query(reset);
+                var reset = 'TRUNCATE tonychau_twitterstream.HashTable;';
+                query(reset);
                 for (var i = 0; i < hashName.length; i += 1){
                     var sql = 'INSERT INTO tonychau_twitterstream.HashTable(HashName, TwitterID) VALUE(\'' + hashName[i] + '\', ' + TwitterID[i] + ');';
-                    console.log(sql);
                     query(sql);
                 }
             }
@@ -88,7 +87,7 @@ module.exports = {
             if (err){
                 throw err;
             }else{
-                var sql = 'TRUNUCATE tonychau_twitterstream.HashTable;';
+                var sql = 'TRUNCATE tonychau_twitterstream.HashTable;';
                 query(sql);
             }
         });
