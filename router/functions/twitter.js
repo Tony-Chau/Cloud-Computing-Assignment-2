@@ -16,19 +16,18 @@ module.exports = {
       var length = data.search_metadata.count;
       var text = data.statuses[0].text;
       var hashdata = [];
-      var twitterID = [length];
+      var twitterID = [];
+      mysql.ResetHashTable();
       for (var i = 0; i < length; i += 1){
-        var number = i + 0;
-        var hash = data.statuses[i].entities.hashtags;
-        for (var j = 0; j < hash.length; j += 1){
-           hashdata.push(hash[j].text);
-         }
-        twitter[length] = i;
+        if (tool.isset(data.statuses[i])){
+          var hash = data.statuses[i].entities.hashtags; //This section here is a glitch where sometimes it works, but other times it doesn't
+          for (var j = 0; j < hash.length; j += 1){
+            hashdata.push(hash[j].text);
+            twitterID.push(i);
+          }
+        }
       }
       mysql.InsertHashTable(hashdata, twitterID);
-      //  console.log(hashdata);
-      // console.log(text);
-      //console.log(data.search_metadata.count);
       res.send(hashdata);
     });
   }
