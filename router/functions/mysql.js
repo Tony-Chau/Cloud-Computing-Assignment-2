@@ -60,9 +60,8 @@ module.exports = {
     InsertHashTable: function(hashName, TwitterID, twitterDate){
         var reset = 'TRUNCATE tonychau_twitterstream.HashTable;';
         query(reset);
-        console.log(new Date('Mon Oct 23 01:53:20 +0000 2017'));
         for (var i = 0; i < hashName.length; i += 1){
-            var sql = 'INSERT INTO tonychau_twitterstream.HashTable(HashName, TwitterID) VALUE(\'' + hashName[i] + '\', ' + TwitterID[i] + ');';
+            var sql = 'INSERT INTO tonychau_twitterstream.HashTable(HashName, TwitterID, TwitterDate) VALUE(\'' + hashName[i] + '\', ' + TwitterID[i] + ', \''+twitterDate[i]+'\');';
             query(sql);
         }
     },

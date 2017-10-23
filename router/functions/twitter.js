@@ -10,7 +10,7 @@ const mysql = require('./mysql.js');
 
 module.exports = {
   search: function (req, res){
-    mysql.Connect();
+    //mysql.Connect();
     var query = req.query.q;
     var query = '#' + query; //(or %23)
     twitter.get('search/tweets', { q: query, count: 100, lang: 'en' }, function(err, data, response) {
@@ -31,8 +31,9 @@ module.exports = {
         }
       }
       var twitterDate = [];
-      for (var i = 0; i < twitterID; i+= 1){
-        twitterDate.push(date[twitterID[i]]);
+      for (var i = 0; i < twitterID.length; i+= 1){
+        var datetime = tool.convertDateTimeToString(date[twitterDate[i]]);
+        twitterDate.push(datetime);
       }
       mysql.InsertHashTable(hashdata, twitterID, twitterDate);
       res.send(data);
