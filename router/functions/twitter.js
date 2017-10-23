@@ -32,7 +32,7 @@ module.exports = {
       }
       var twitterDate = [];
       for (var i = 0; i < twitterID.length; i+= 1){
-        var datetime = tool.convertDateTimeToString(date[twitterDate[i]]);
+        var datetime = tool.convertDateTimeToString(date[twitterID[i]]);
         twitterDate.push(datetime);
       }
       mysql.InsertHashTable(hashdata, twitterID, twitterDate);

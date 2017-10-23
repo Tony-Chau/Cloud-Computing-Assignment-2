@@ -61,6 +61,7 @@ module.exports = {
         var reset = 'TRUNCATE tonychau_twitterstream.HashTable;';
         query(reset);
         for (var i = 0; i < hashName.length; i += 1){
+            //console.log(twitterDate[i]);
             var sql = 'INSERT INTO tonychau_twitterstream.HashTable(HashName, TwitterID, TwitterDate) VALUE(\'' + hashName[i] + '\', ' + TwitterID[i] + ', \''+twitterDate[i]+'\');';
             query(sql);
         }
