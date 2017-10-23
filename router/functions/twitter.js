@@ -10,6 +10,7 @@ const mysql = require('./mysql.js');
 
 module.exports = {
   search: function (req, res){
+    mysql.Connect();
     var query = req.query.q;
     var query = '#' + query; //(or %23)
     twitter.get('search/tweets', { q: query, count: 100, lang: 'en' }, function(err, data, response) {
@@ -17,17 +18,24 @@ module.exports = {
       var text = data.statuses[0].text;
       var hashdata = [];
       var twitterID = [];
+      var date = [];
       for (var i = 0; i < length; i += 1){
         if (tool.isset(data.statuses[i])){
-          var hash = data.statuses[i].entities.hashtags; //This section here is a glitch where sometimes it works, but other times it doesn't
+          var twitterDetail = data.statuses[i];
+          var hash = twitterDetail.entities.hashtags; //This section here is a glitch where sometimes it works, but other times it doesn't
           for (var j = 0; j < hash.length; j += 1){
             hashdata.push(hash[j].text);
             twitterID.push(i);
           }
+          date.push(twitterDetail.created_at);
         }
       }
-      mysql.InsertHashTable(hashdata, twitterID);
-      res.send(hashdata);
+      var twitterDate = [];
+      for (var i = 0; i < twitterID; i+= 1){
+        twitterDate.push(date[twitterID[i]]);
+      }
+      mysql.InsertHashTable(hashdata, twitterID, twitterDate);
+      res.send(data);
     });
   }
 }
