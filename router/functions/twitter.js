@@ -17,25 +17,40 @@ module.exports = {
       var length = data.search_metadata.count;
       var text = data.statuses[0].text;
       var hashdata = [];
-      var twitterID = [];
+      var twitterHashID = [];
       var date = [];
+      var twitterText = [];
+      var twitterUser = [];
+      var twitterMention = [];
+      var twitterAuthor = [];
+      var twitterID = [];
+      var twitterDate = [];
+      //Setting hashtag 
       for (var i = 0; i < length; i += 1){
         if (tool.isset(data.statuses[i])){
           var twitterDetail = data.statuses[i];
           var hash = twitterDetail.entities.hashtags; //This section here is a glitch where sometimes it works, but other times it doesn't
           for (var j = 0; j < hash.length; j += 1){
             hashdata.push(hash[j].text);
-            twitterID.push(i);
+            twitterHashID.push(twitterDetail.id);
+            date.push(twitterDetail.created_at);
           }
-          date.push(twitterDetail.created_at);
+          twitterUser.push(twitterDetail.user.name); 
+          twitterText.push(twitterDetail.text); 
+          twitterID.push(twitterDetail.id);
+          twitterDate.push(tool.convertDateTimeToString(twitterDetail.created_at));
+  
         }
       }
-      var twitterDate = [];
-      for (var i = 0; i < twitterID.length; i+= 1){
-        var datetime = tool.convertDateTimeToString(date[twitterID[i]]);
-        twitterDate.push(datetime);
+      var twitterHashDate = [];
+      twitterText = tool.ArrayTextFix(twitterText);
+      //Setting up name
+      for (var i = 0; i < twitterHashID.length; i+= 1){
+        var datetime = tool.convertDateTimeToString(date[twitterHashID[i]]);
+        twitterHashDate.push(datetime);
       }
-      mysql.InsertHashTable(hashdata, twitterID, twitterDate);
+      mysql.InsertHashTable(hashdata, twitterHashID, twitterHashDate);
+      //mysql.InsertTwitterTable(twitterID, twitterText, twitterDate, twitterUser);
       res.send(data);
     });
   }

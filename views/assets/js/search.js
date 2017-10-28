@@ -6,7 +6,7 @@ $('.search-panel .dropdown-menu').find('a').click(function(e) {
 	$('.input-group #search_param').val(param);
 
 	var menu = $('#menu').val();
-	if (menu == 'Graph' || 'Stream'){
+	if (menu == 'Graph' || menu == 'Stream'){
 		$('#search').removeAttr('disabled');
 	}
 });
