@@ -87,5 +87,12 @@ module.exports = {
     ResetHashTable: function(){
         var sql = 'TRUNCATE tonychau_twitterstream.HashTable;';
         query(sql);
+    },
+    InsertMentionTable: function(MentionName, TwitterID){
+        for(var i = 0; i < MentionName.length; i += 1){
+            var sql = "INSERT INTO tonychau_twitterstream.MentionTable(MentionName, TwitterID) VALUE ";
+            sql += "(\"" + MentionName[i] + "\", \"" + TwitterID + "\");";
+            query(sql);
+        }
     }
 }

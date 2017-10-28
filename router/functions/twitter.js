@@ -25,15 +25,22 @@ module.exports = {
       var twitterAuthor = [];
       var twitterID = [];
       var twitterDate = [];
+      var twitterMentionName = [];
+      var twitterMentionID = [];
       //Setting hashtag 
       for (var i = 0; i < length; i += 1){
         if (tool.isset(data.statuses[i])){
           var twitterDetail = data.statuses[i];
+          var mention = twitterDetail.entities.user_mentions;
           var hash = twitterDetail.entities.hashtags; //This section here is a glitch where sometimes it works, but other times it doesn't
           for (var j = 0; j < hash.length; j += 1){
             hashdata.push(hash[j].text);
             twitterHashID.push(twitterDetail.id);
             date.push(twitterDetail.created_at);
+          }
+          for(var j = 0; j < mention.length; j += 1){
+            twitterMentionName.push(mention[j].name);
+            twitterMentionID.push(twitterDetail.id);
           }
           twitterUser.push(twitterDetail.user.name); 
           twitterText.push(twitterDetail.text); 
@@ -51,6 +58,7 @@ module.exports = {
       }
       mysql.InsertHashTable(hashdata, twitterHashID, twitterHashDate);
       //mysql.InsertTwitterTable(twitterID, twitterText, twitterDate, twitterUser);
+      mysql.InsertMentionTable(twitterMentionName, twitterMentionID);        
       res.send(data);
     });
   }
