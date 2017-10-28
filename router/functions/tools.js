@@ -29,8 +29,12 @@ module.exports = {
                     s += textArray[j];
                 }
             }
+            s = s.replace(/'/i, "\'");
+            s = s.reaplce(/"/i, "\"");
             newText.push(s);
+            
         }
+        
         return newText;
     }
 }
