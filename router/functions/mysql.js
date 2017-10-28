@@ -62,24 +62,28 @@ module.exports = {
             twitterid_validation[i] = false;
         }
         con.query("SELECT * FROM tonychau_twitterstream.HashTable;", function(err, result){
-            for (var i = 0; i < result.length; i += 1){
-                for (var j = 0; j < TwitterID.length; j += 1){
-                    if (TwitterID[j] == result[i].TwitterID){
-                        twitterid_validation[i] = true;
-                    }else{
-                        twitterid_validation[i] = false;
-                        count += 1;
-                    }                    
+            if (err){
+                throw err;
+            }else{
+                for (var i = 0; i < result.length; i += 1){
+                    for (var j = 0; j < TwitterID.length; j += 1){
+                        if (TwitterID[j] == result[i].TwitterID){
+                            twitterid_validation[i] = true;
+                        }else{
+                            twitterid_validation[i] = false;
+                            count += 1;
+                        }                    
+                    }
+    
                 }
-
-            }
-            if (result.length + count > 1000){
-                query('TRUNCATE tonychau_twitterstream.HashTable;');
-            }
-            for (var i = 0; i < TwitterID.length; i += 1){
-                if (!twitterid_validation[i]){
-                    var sql = 'INSERT INTO tonychau_twitterstream.HashTable(HashName, TwitterID, TwitterDate) VALUE(\"' + hashName[i] + '\", \"' + TwitterID[i] + '\", \"'+twitterDate[i]+'\");';
-                    query(sql);
+                if (result.length + count > 1000){
+                    query('TRUNCATE tonychau_twitterstream.HashTable;');
+                }
+                for (var i = 0; i < TwitterID.length; i += 1){
+                    if (!twitterid_validation[i]){
+                        var sql = 'INSERT INTO tonychau_twitterstream.HashTable(HashName, TwitterID, TwitterDate) VALUE(\"' + hashName[i] + '\", \"' + TwitterID[i] + '\", \"'+twitterDate[i]+'\");';
+                        query(sql);
+                    }
                 }
             }
         });
@@ -89,10 +93,36 @@ module.exports = {
         query(sql);
     },
     InsertMentionTable: function(MentionName, TwitterID){
-        for(var i = 0; i < MentionName.length; i += 1){
-            var sql = "INSERT INTO tonychau_twitterstream.MentionTable(MentionName, TwitterID) VALUE ";
-            sql += "(\"" + MentionName[i] + "\", \"" + TwitterID + "\");";
-            query(sql);
-        }
+        var twitterid_validation = [TwitterID.length];
+        var count = 0;
+
+        con.query("SELECT * FROM tonychau_twitterstream.MentionTable;", function(err, result){
+            if (err){
+                throw err;
+            }else{
+                for (var i = 0; i < TwitterID.length; i += 1){
+                    twitterid_validation[i] = false;
+                }
+                for (var i = 0; i < result.length; i += 1){
+                    for (var j = 0; j < TwitterID.length; j += 1){
+                        if (TwitterID[j] == result[i].TwitterID){
+                            twitterid_validation[i] = true;
+                        }else{
+                            twitterid_validation[i] = false;
+                            count += 1;
+                        }                    
+                    }
+        
+                }
+                if (result.length + count > 1000){
+                    query('TRUNCATE tonychau_twitterstream.MentionTable;');
+                }
+                for(var i = 0; i < MentionName.length; i += 1){
+                    var sql = "INSERT INTO tonychau_twitterstream.MentionTable(MentionName, TwitterID) VALUE ";
+                    sql += "(\"" + MentionName[i] + "\", \"" + TwitterID + "\");";
+                    query(sql);
+                }
+            }
+        });
     }
 }
