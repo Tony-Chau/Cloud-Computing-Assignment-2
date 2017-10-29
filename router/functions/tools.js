@@ -21,18 +21,17 @@ module.exports = {
         for(var i = 0; i < textArray.length; i += 1){
             var s = '';
             for(var j = 0; j < textArray[i].length; j += 1){
-                if (textArray[j] == "'"){
-                    s += "\'";
-                }else if(textArray[j] == '"'){
-                    s += '\"';
+                if (textArray[j] == "\'"){
+                    s += "\\\'";
+                }else if(textArray[j] == '\"'){
+                    s += '\\\"';
                 }else{
                     s += textArray[j];
                 }
             }
-            s = s.replace(/'/i, "\'");
-            s = s.reaplce(/"/i, "\"");
+            // s = s.replace(/'/i,'\\\'');
+            // s = s.reaplce(/"/i, "\\\"");
             newText.push(s);
-            
         }
         
         return newText;

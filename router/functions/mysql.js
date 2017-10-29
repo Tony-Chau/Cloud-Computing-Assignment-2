@@ -36,6 +36,7 @@ module.exports = {
             query(sql);
             //console.log(sql);
         }
+        
     }, 
     ResetTwitterTable: function(){
         var sql = 'TRUNCATE tonychau_twitterstream.TwitterTable;';
