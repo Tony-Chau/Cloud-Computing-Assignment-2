@@ -23,8 +23,9 @@ function textCheck(){
 }
 
 function submiter(){
-	var search_param = $('#search_param').val();
-	var link = '/' + search_param;
+	// var search_param = $('#search_param').val();
+	// var link = '/' + search_param;
+	var link = '/Graph';
 	$('#FormSearch').attr('action', link);
 	$('#submits').click();
 }
