@@ -25,6 +25,11 @@ router.get('/:search_param', function(req, res){
   tool.errorpage(req, res);
 });
 
-
+router.get('/twitterGraph', function(req, res){
+  
+    res.render('twitterGraph', {
+      Title: 'Twitter Hashtag Search',
+    });
+  });
 
 module.exports = router;

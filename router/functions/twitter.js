@@ -61,5 +61,8 @@ module.exports = {
       mysql.InsertMentionTable(twitterMentionName, twitterMentionID);        
       res.send(data);
     });
+  },
+  stream: function (req, res){
+    
   }
 }
