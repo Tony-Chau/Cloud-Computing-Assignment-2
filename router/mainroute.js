@@ -20,16 +20,13 @@ router.get('/:search_param', function(req, res){
       //res.send(search_param);
     }else if (search_param == 'Stream'){
       res.send(search_param);
+    }else if (search_param == 'twitterGraph'){
+      res.render('twitterGraph', {
+        Title: 'Twitter Hashtag Search',
+      });
     }
   }
   tool.errorpage(req, res);
 });
-
-router.get('/twitterGraph', function(req, res){
-  
-    res.render('twitterGraph', {
-      Title: 'Twitter Hashtag Search',
-    });
-  });
 
 module.exports = router;
