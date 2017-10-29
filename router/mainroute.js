@@ -12,9 +12,9 @@ router.get('/', function(req, res){
 });
 
 router.get('/:search_param', function(req, res){
-
   if (tool.isset(req.params.search_param) && tool.isset(req.query.q)){
     var search_param = req.params.search_param;
+    console.log(search_param);
     if(search_param == 'Graph'){
       twitter.search(req, res);
       //res.send(search_param);
@@ -26,7 +26,10 @@ router.get('/:search_param', function(req, res){
       });
     }
   }
-  tool.errorpage(req, res);
+  //tool.errorpage(req, res);
+  res.render('twitterGraph', {
+    Title: 'Twitter Hashtag Search',
+  });
 });
 
 module.exports = router;
