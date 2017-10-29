@@ -57,7 +57,7 @@ module.exports = {
         twitterHashDate.push(datetime);
       }
       mysql.InsertHashTable(hashdata, twitterHashID, twitterHashDate);
-      //mysql.InsertTwitterTable(twitterID, twitterText, twitterDate, twitterUser);
+      mysql.InsertTwitterTable(twitterID, twitterText, twitterDate, twitterUser);
       mysql.InsertMentionTable(twitterMentionName, twitterMentionID);        
       res.send(data);
     });

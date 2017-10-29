@@ -19,21 +19,21 @@ module.exports = {
     ArrayTextFix: function(textArray){
         var newText = []; 
         for(var i = 0; i < textArray.length; i += 1){
-            var s = '';
-            for(var j = 0; j < textArray[i].length; j += 1){
-                if (textArray[j] == "\'"){
-                    s += "\\\'";
-                }else if(textArray[j] == '\"'){
-                    s += '\\\"';
-                }else{
-                    s += textArray[j];
-                }
-            }
-            // s = s.replace(/'/i,'\\\'');
-            // s = s.reaplce(/"/i, "\\\"");
+            var s = textArray[i];
+             s = s.replace(/'/gi,'%27');
+             s = s.replace(/"/gi, "%22");
             newText.push(s);
         }
-        
+        return newText;
+    },
+    RemoveHtmlEncoding: function(textArray){
+        var newText = []; 
+        for (var i = 0; i < textArray.length; i += 1){
+            var s = textArray[i];
+            s = s.replace(/%27/, '\'');
+            s = s.replace(/%22/, '\"');
+            newText.push(s);
+        }
         return newText;
     }
 }
