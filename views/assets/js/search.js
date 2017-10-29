@@ -1,14 +1,16 @@
-$('.search-panel .dropdown-menu').find('a').click(function(e) {
-	e.preventDefault();
-	var param = $(this).attr("href").replace("#","");
-	var concept = $(this).text();
-	$('.search-panel span#search_hashtag').text(concept);
-	$('.input-group #search_param').val(param);
+$(document).ready(function(){
+	$('.search-panel .dropdown-menu').find('a').click(function(e) {
+		e.preventDefault();
+		var param = $(this).attr("href").replace("#","");
+		var concept = $(this).text();
+		$('.search-panel span#search_hashtag').text(concept);
+		$('.input-group #search_param').val(param);
 
-	var menu = $('#menu').val();
-	if (menu == 'Graph' || 'Stream'){
-		$('#search').removeAttr('disabled');
-	}
+		var menu = $('#menu').val();
+		if (menu == 'Graph' || 'Stream'){
+			$('#search').removeAttr('disabled');
+		}
+	});
 });
 
 function textCheck(){
