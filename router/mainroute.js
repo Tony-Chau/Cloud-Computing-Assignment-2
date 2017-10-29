@@ -5,6 +5,8 @@ const MySqlServer = require('./functions/mysql.js');
 const twitter = require('./functions/twitter.js');
 const tool = require('./functions/tools.js');
 
+// const plotly = require('./functions/plotly.js');
+
 router.get('/', function(req, res){
   res.render('index', {
     Title: 'Twitter Hashtag Search',
