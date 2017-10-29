@@ -11,25 +11,18 @@ router.get('/', function(req, res){
   });
 });
 
-router.get('/:search_param', function(req, res){
-  if (tool.isset(req.params.search_param) && tool.isset(req.query.q)){
-    var search_param = req.params.search_param;
-    console.log(search_param);
-    if(search_param == 'Graph'){
-      twitter.search(req, res);
-      //res.send(search_param);
-    }else if (search_param == 'Stream'){
-      res.send(search_param);
-    }else if (search_param == 'twitterGraph'){
-      res.render('twitterGraph', {
-        Title: 'Twitter Hashtag Search',
-      });
-    }
+router.get('/Graph', function(req, res){
+  if (tool.isset(req.query.q)){
+    MySqlServer.Connect();
+    twitter.search(req, res);
+    setTimeout(function() {
+      console.log('step 1 complete');
+      MySqlServer.getHashName(req.query.q, res);
+    }, 15000);
+    
+
   }
-  //tool.errorpage(req, res);
-  res.render('twitterGraph', {
-    Title: 'Twitter Hashtag Search',
-  });
+  tool.errorpage(req, res);
 });
 
 module.exports = router;

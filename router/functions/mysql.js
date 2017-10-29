@@ -27,127 +27,92 @@ module.exports = {
             }
         });
     },
-    InsertTwitterTable: function (twitterID, text, time, author){
-        var length = twitterID.length;
-        var reset = 'TRUNCATE tonychau_twitterstream.HashTable;';
-        var twitterid_validation = [twitterID.length];
-        var count = 0;
-        for (var i = 0; i < twitterID.length; i += 1){
-            twitterid_validation[i] = false;
-        }
-        con.query("SELECT * FROM tonychau_twitterstream.TwitterTable;", function(err, result){
+    CreateTable : function (search){
+        con.query("SELECT * FROM `tonychau_twitterstream`.`SearchTable`;", function(err, result){
             if (err){
                 throw err;
             }else{
+                var check = true;
                 for (var i = 0; i < result.length; i += 1){
-                    for (var j = 0; j < TwitterID.length; j += 1){
-                        if (TwitterID[j] == result[i].TwitterID){
-                            twitterid_validation[i] = true;
-                        }else{
-                            twitterid_validation[i] = false;
-                            count += 1;
-                        }                    
+                    if (result[i].Name == search.toLowerCase()){
+                        check = false;
                     }
-    
                 }
-                if (result.length + count > 1000){
-                    query('TRUNCATE tonychau_twitterstream.TwitterTable;');
-                }
-                for (var i = 0; i < length; i += 1){
-                    var message = text[i];
-                    var sql = 'INSERT INTO tonychau_twitterstream.TwitterTable(TwitterID, text, time, Author) VALUES';
-                    sql += '(\"' + twitterID[i] + '\", \"' + message + '\", \"' + time[i] + '\", \"' + author[i] + '\");';
+                if (check){
+                    var sql = "CREATE TABLE  `tonychau_twitterstream`.`" + search.toLowerCase() + "` ";
+                    sql += "(TwitterID VARCHAR(255) NOT NULL, Name VARCHAR(255) NOT NULL, Time DATETIME NOT NULL);";
                     query(sql);
-                    //console.log(sql);
+                    sql = "INSERT INTO `tonychau_twitterstream`.`SearchTable` (name) VALUE ('" + search.toLowerCase() + "');";
+                    query (sql); 
                 }
             }
         });
-    }, 
-    ResetTwitterTable: function(){
-        var sql = 'TRUNCATE tonychau_twitterstream.TwitterTable;';
-        con.query(sql, function(err){
-            if (err){
-                throw err;
-            }
-        });
     },
-    SelectTwitterTable : function(req, res, search){
-        var sql = 'Select * FROM tonychau_twitterstream.TwitterTable;';
-        con.query(sql, function(err, result){
-            if (err){
-                throw err;
-            }
-            //do stuff here
-        });
-    },
-    InsertHashTable: function(hashName, TwitterID, twitterDate){
-        var reset = 'TRUNCATE tonychau_twitterstream.HashTable;';
-        var twitterid_validation = [TwitterID.length];
-        var count = 0;
-        for (var i = 0; i < TwitterID.length; i += 1){
-            twitterid_validation[i] = false;
-        }
-        con.query("SELECT * FROM tonychau_twitterstream.HashTable;", function(err, result){
+    InsertHash: function (search, length, HashName, twitterHashID, twitterHashDate){
+        var q = "SELECT * FROM `tonychau_twitterstream`.`" + search.toLowerCase() + "`;";
+        con.query(q, function (err, result){
             if (err){
                 throw err;
             }else{
+                var SameID = [];
                 for (var i = 0; i < result.length; i += 1){
-                    for (var j = 0; j < TwitterID.length; j += 1){
-                        if (TwitterID[j] == result[i].TwitterID){
-                            twitterid_validation[i] = true;
-                        }else{
-                            twitterid_validation[i] = false;
-                            count += 1;
-                        }                    
+                    for (var j = 0; j < twitterHashID.length; j += 1){
+                        if (result[i].name == twitterHashID[j]){
+                            SameID.push(twitterHashID[j]);
+                        }
                     }
-    
                 }
-                if (result.length + count > 1000){
-                    query('TRUNCATE tonychau_twitterstream.HashTable;');
-                }
-                for (var i = 0; i < TwitterID.length; i += 1){
-                    if (!twitterid_validation[i]){
-                        var sql = 'INSERT INTO tonychau_twitterstream.HashTable(HashName, TwitterID, TwitterDate) VALUE(\"' + hashName[i] + '\", \"' + TwitterID[i] + '\", \"'+twitterDate[i]+'\");';
+                var newSameID = SameID.filter(function(elem, index, self){
+                    return index == self.indexOf(elem);
+                });
+                for (var i = 0; i < twitterHashID.length; i += 1){
+                    var check = true;
+                    for (var j = 0; j < newSameID.length; j += 1){
+                        if (newSameID[j] == twitterHashID[i]){
+                            check = false;
+                        }
+                    }
+                    if (check){
+                        var sql = "INSERT INTO `tonychau_twitterstream`.`" + search.toLowerCase() + "`(TwitterID, Name, Time) VALUE ";
+                        sql += "('" + twitterHashID[i] + "', '" + HashName[i].toLowerCase() + "', '" + twitterHashDate[i] + "');";
                         query(sql);
                     }
                 }
             }
         });
     },
-    ResetHashTable: function(){
-        var sql = 'TRUNCATE tonychau_twitterstream.HashTable;';
-        query(sql);
-    },
-    InsertMentionTable: function(MentionName, TwitterID){
-        var twitterid_validation = [TwitterID.length];
-        var count = 0;
-
-        con.query("SELECT * FROM tonychau_twitterstream.MentionTable;", function(err, result){
+    getHashName: function(search, res){
+        var sql = "SELECT * FROM `tonychau_twitterstream`.`" + search.toLowerCase() + "`;";
+        con.query(sql, function (err, result){
             if (err){
                 throw err;
             }else{
-                for (var i = 0; i < TwitterID.length; i += 1){
-                    twitterid_validation[i] = false;
-                }
+                var array = [result.length];
                 for (var i = 0; i < result.length; i += 1){
-                    for (var j = 0; j < TwitterID.length; j += 1){
-                        if (TwitterID[j] == result[i].TwitterID){
-                            twitterid_validation[i] = true;
-                        }else{
-                            twitterid_validation[i] = false;
-                            count += 1;
-                        }                    
+                    array.push(result[i].Name);
+                }
+                var entry = array.filter(function(elem, index, self){
+                    return index == self.indexOf(elem);
+                });
+                  var point = [entry.length];
+                  for (var i = 0; i < entry.length; i += 1){
+                    point[i] = 0;
+                  }
+                  for (var i = 0; i < entry.length; i += 1){
+                    var increment = 0;
+                    for (var j = 0; j < array.length; j += 1){
+                      if (array[j] == entry[i]){
+                        increment += 1;
+                      }
                     }
-        
-                }
-                if (result.length + count > 1000){
-                    query('TRUNCATE tonychau_twitterstream.MentionTable;');
-                }
-                for(var i = 0; i < MentionName.length; i += 1){
-                    var sql = "INSERT INTO tonychau_twitterstream.MentionTable(MentionName, TwitterID) VALUE ";
-                    sql += "(\"" + MentionName[i] + "\", \"" + TwitterID + "\");";
-                    query(sql);
-                }
+                    point[i] += increment;
+                  }
+                  var send = {
+                    hash: entry,
+                    point: point,
+                    Title: 'Twitter Hashtag Search'
+                  }
+                  res.render('twitterGraph', send);
             }
         });
     }

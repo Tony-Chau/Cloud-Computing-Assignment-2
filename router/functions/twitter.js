@@ -9,24 +9,16 @@ const tool = require('./tools.js');
 const mysql = require('./mysql.js');
 
 module.exports = {
-  search: function (req, res){
-    //mysql.Connect();
+  search: function (req){
     var query = req.query.q;
-    var query = '#' + query; //(or %23)
-    twitter.get('search/tweets', { q: query, count: 100, lang: 'en' }, function(err, data, response) {
-      var length = data.search_metadata.count;
+    var hash = '#' + query; //(or %23)
+    mysql.CreateTable(query);
+    twitter.get('search/tweets', { q: hash, count: 100, lang: 'en' }, function(err, data, response) {
+      var length = data.statuses.length;
       var text = data.statuses[0].text;
-      var hashdata = [];
+      var HashName = [];
       var twitterHashID = [];
       var date = [];
-      var twitterText = [];
-      var twitterUser = [];
-      var twitterMention = [];
-      var twitterAuthor = [];
-      var twitterID = [];
-      var twitterDate = [];
-      var twitterMentionName = [];
-      var twitterMentionID = [];
       //Setting hashtag 
       for (var i = 0; i < length; i += 1){
         if (tool.isset(data.statuses[i])){
@@ -34,35 +26,23 @@ module.exports = {
           var mention = twitterDetail.entities.user_mentions;
           var hash = twitterDetail.entities.hashtags; //This section here is a glitch where sometimes it works, but other times it doesn't
           for (var j = 0; j < hash.length; j += 1){
-            hashdata.push(hash[j].text);
+            HashName.push(hash[j].text);
             twitterHashID.push(twitterDetail.id);
             date.push(twitterDetail.created_at);
           }
-          for(var j = 0; j < mention.length; j += 1){
-            twitterMentionName.push(mention[j].name);
-            twitterMentionID.push(twitterDetail.id);
-          }
-          twitterUser.push(twitterDetail.user.name); 
-          twitterText.push(twitterDetail.text); 
-          twitterID.push(twitterDetail.id);
-          twitterDate.push(tool.convertDateTimeToString(twitterDetail.created_at));
-  
         }
       }
       var twitterHashDate = [];
-      twitterText = tool.ArrayTextFix(twitterText);
-      //Setting up name
+      //Setting up date
       for (var i = 0; i < twitterHashID.length; i+= 1){
         var datetime = tool.convertDateTimeToString(date[twitterHashID[i]]);
         twitterHashDate.push(datetime);
       }
-      mysql.InsertHashTable(hashdata, twitterHashID, twitterHashDate);
-      mysql.InsertTwitterTable(twitterID, twitterText, twitterDate, twitterUser);
-      mysql.InsertMentionTable(twitterMentionName, twitterMentionID);        
-      res.send(data);
+      setTimeout(function() {
+        mysql.InsertHash(query, length, HashName, twitterHashID, twitterHashDate);   
+      }, 5000);
+      
+      //res.send(data);     
     });
-  },
-  stream: function (req, res){
-    
   }
 }
