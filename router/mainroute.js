@@ -16,9 +16,8 @@ router.get('/Graph', function(req, res){
     MySqlServer.Connect();
     twitter.search(req, res);
     setTimeout(function() {
-      console.log('step 1 complete');
       MySqlServer.getHashName(req.query.q, res);
-    }, 15000);
+    }, 20000);
     
 
   }
