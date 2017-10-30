@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const tool = require('./tools.js');
+const lowerCase = require('lower-case');
 const mysqlConnection = {
     dbHost: 'twitterstreamcloudcomputing.heliohost.org',
     dbDatabase: 'tonychau_twitterstream',
@@ -35,22 +36,22 @@ module.exports = {
             }else{
                 var check = true;
                 for (var i = 0; i < result.length; i += 1){
-                    if (result[i].Name == search.toLowerCase()){
+                    if (result[i].Name == lowerCase(search)){
                         check = false;
                     }
                 }
                 if (check){
-                    var sql = "CREATE TABLE  `tonychau_twitterstream`.`" + search.toLowerCase() + "` ";
+                    var sql = "CREATE TABLE  `tonychau_twitterstream`.`" + lowerCase(search) + "` ";
                     sql += "(TwitterID VARCHAR(255) NOT NULL, Name VARCHAR(255) NOT NULL, Time DATETIME NOT NULL);";
                     query(sql);
-                    sql = "INSERT INTO `tonychau_twitterstream`.`SearchTable` (name) VALUE ('" + search.toLowerCase() + "');";
+                    sql = "INSERT INTO `tonychau_twitterstream`.`SearchTable` (name) VALUE ('" + lowerCase(search) + "');";
                     query (sql);
                 }
             }
         });
     },
     InsertHash: function (search, length, HashName, twitterHashID, twitterHashDate){
-        var q = "SELECT * FROM `tonychau_twitterstream`.`" + search.toLowerCase() + "`;";
+        var q = "SELECT * FROM `tonychau_twitterstream`.`" + lowerCase(search) + "`;";
         con.query(q, function (err, result){
             if (err){
                 throw err;
@@ -63,8 +64,8 @@ module.exports = {
                         }
                     }
                     if (check){
-                        var sql = "INSERT INTO `tonychau_twitterstream`.`" + search.toLowerCase() + "`(TwitterID, Name, Time) VALUE ";
-                        sql += "('" + twitterHashID[i] + "', '" + HashName[i].toLowerCase() + "', '" + twitterHashDate[i] + "');";
+                        var sql = "INSERT INTO `tonychau_twitterstream`.`" + lowerCase(search) + "`(TwitterID, Name, Time) VALUE ";
+                        sql += "('" + twitterHashID[i] + "', '" + lowerCase(HashName[i]) + "', '" + twitterHashDate[i] + "');";
                         query(sql);
                     }
                 }
@@ -72,7 +73,7 @@ module.exports = {
         });
     },
     getHashName: function(search, res){
-        var sql = "SELECT * FROM `tonychau_twitterstream`.`" + search.toLowerCase() + "`;";
+        var sql = "SELECT * FROM `tonychau_twitterstream`.`" + lowerCase(search) + "`;";
         con.query(sql, function (err, result){
             console.log('Step 2');
             if (err){

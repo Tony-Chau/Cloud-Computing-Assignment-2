@@ -21,6 +21,7 @@
     "body-parser": "^1.18.2",
     "dateformat": "^3.0.2",
     "express": "^4.16.2",
+    "lower-case": "^1.1.4",
     "mongod": "^2.0.0",
     "mysql": "^2.15.0",
     "nodemon": "^1.12.1",

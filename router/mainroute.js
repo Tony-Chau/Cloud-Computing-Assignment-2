@@ -16,9 +16,9 @@ router.get('/Graph', function(req, res){
   if (tool.isset(req.query.q)){
     app.locals.query = req.query.q;
     MySqlServer.Connect();
-    twitter.search(req, res);
+    twitter.search(req);
     setTimeout(function() {
-      res.render('index', {
+      res.render('twitterGraph', {
         Title: 'Twitter Hashtag Search',
         search_hashtag: req.query.q
       });
@@ -30,9 +30,9 @@ router.get('/Graph', function(req, res){
 });
 
 router.get('/GetQueries', function(req, res){
-  MySqlServer.Connect();
+  //MySqlServer.Connect();
   var query = app.locals.query;
-  MySqlServer.getHashName(req.query.q, res);
+  MySqlServer.getHashName(query, res);
 });
 
 module.exports = router;
