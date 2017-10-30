@@ -21,7 +21,7 @@ router.get('/Graph', function(req, res){
     setTimeout(function() {
       res.render('index', {
         Title: 'Twitter Hashtag Search',
-        search_hashtag: search
+        search_hashtag: req.query.q
       });
     }, 20000);
     
