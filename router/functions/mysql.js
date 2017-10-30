@@ -86,6 +86,7 @@ module.exports = {
                 var entry = array.filter(function(elem, index, self){
                     return index == self.indexOf(elem);
                 });
+                console.log('step 3');
                   var point = [entry.length];
                   for (var i = 0; i < entry.length; i += 1){
                     point[i] = 0;
@@ -99,10 +100,12 @@ module.exports = {
                     }
                     point[i] += increment;
                   }
-                  var top = tool.Top10Search(entry, point);
+                  var rank = tool.Ranking(entry, point);
+                  var top = tool.Top10Search(rank);
+                  console.log('step 3');
                   var send = {
-                    hash: entry,
-                    point: point,
+                    hash: rank.name,
+                    point: rank.point,
                     topHash: top.name,
                     topPoint: top.point
                   }

@@ -12,9 +12,7 @@ module.exports = {
   search: function (query){
     var hash = '#' + query; //(or %23)
     mysql.CreateTable(query);
-    console.log('step 1');
     twitter.get('search/tweets', { q: hash, count: 100, lang: 'en' }, function(err, data, response) {
-      console.log('step 2');
       var length = data.statuses.length;
       var text = data.statuses[0].text;
       var HashName = [];

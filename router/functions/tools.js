@@ -36,7 +36,19 @@ module.exports = {
         }
         return newText;
     },
-    Top10Search: function (name, point){
+    Top10Search: function (rank){
+        var top10Name = [];
+        var top10Point = [];
+        for (var i = 0 ; i < 10; i += 1){
+            top10Name.push(rank[i].name);
+            top10Point.push(rank[i].point);
+        }
+        return {
+            name: top10Name,
+            point: top10Point
+        }
+    },
+    Ranking: function(name, point){
         var top = [name.length];
         for (var i = 0; i < name.length; i += 1){
             top[i] = {
@@ -46,15 +58,6 @@ module.exports = {
         }
         arraySort(top, 'point');
         top.reverse();
-        var top10Name = [];
-        var top10Point = [];
-        for (var i = 0 ; i < 10; i += 1){
-            top10Name.push(top[i].name);
-            top10Point.push(top[i].point);
-        }
-        return {
-            name: top10Name,
-            point: top10Point
-        }
+        return top;
     }
 }
