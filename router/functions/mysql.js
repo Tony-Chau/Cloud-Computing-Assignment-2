@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const tool = require('./tools.js');
 const mysqlConnection = {
     dbHost: 'twitterstreamcloudcomputing.heliohost.org',
     dbDatabase: 'tonychau_twitterstream',
@@ -107,9 +108,12 @@ module.exports = {
                     }
                     point[i] += increment;
                   }
+                  var top = tool.Top10Search(entry, point);
                   var send = {
                     hash: entry,
                     point: point,
+                    topHash: top.name,
+                    topPoint: top.point,
                     Title: 'Twitter Hashtag Search'
                   }
                   res.render('twitterGraph', send);
