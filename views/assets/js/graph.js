@@ -44,6 +44,23 @@ function twitterTable(topHash, topPoint){
 }
 
 
+//Taken from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_progressbar_3
+
+function move() {
+  var elem = document.getElementById("loadBar");
+  var width = 1;
+  var id = setInterval(frame, 200);
+  function frame() {
+    if (width >= 100) {
+      clearInterval(id);
+      $('#loadBar').css('display', 'none');
+    } else {
+      width++;
+      elem.style.width = width + '%';
+    }
+  }
+}
+
 // function getSearch(send){
 //   var topHash= x[i];
 //   var topPoint= y[i];
