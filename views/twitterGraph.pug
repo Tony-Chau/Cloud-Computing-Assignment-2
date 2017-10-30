@@ -3,8 +3,9 @@ extends layout
 block content    
   h1 #{title}
   h3 Top 10 Hashtag Graph Search for #{search_hashtag}
-    #loadBar
-    #graphDiv
+    #myProgress
+      #loadBar
+    #graphDiv(style="margin-left: -80px")
     #twitterDiv  
     
   

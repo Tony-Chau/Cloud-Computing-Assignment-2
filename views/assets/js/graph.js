@@ -2,6 +2,7 @@ onload = function getData(){
   $.get('/GetQueries', function (data){
       createGraph(data);
   });
+  loadBarTimer();
 }
 
 function createGraph(data){
@@ -46,7 +47,7 @@ function twitterTable(topHash, topPoint){
 
 //Taken from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_progressbar_3
 
-function move() {
+function loadBarTimer() {
   var elem = document.getElementById("loadBar");
   var width = 1;
   var id = setInterval(frame, 200);
@@ -60,15 +61,3 @@ function move() {
     }
   }
 }
-
-// function getSearch(send){
-//   var topHash= x[i];
-//   var topPoint= y[i];
-// }
-
-// var twitterGraph = {
-//   x: ['giraffes', 'orangutans', 'monkeys', 'a','b','c','d','e','f', 'g'],
-//   y: [20, 14, 23, 1, 2, 3, 4, 5, 2, 30],
-//   name: 'Top 10 Hashtag Search',
-//   type: 'bar'
-// };
