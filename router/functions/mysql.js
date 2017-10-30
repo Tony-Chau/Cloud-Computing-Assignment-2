@@ -44,7 +44,7 @@ module.exports = {
                     sql += "(TwitterID VARCHAR(255) NOT NULL, Name VARCHAR(255) NOT NULL, Time DATETIME NOT NULL);";
                     query(sql);
                     sql = "INSERT INTO `tonychau_twitterstream`.`SearchTable` (name) VALUE ('" + search.toLowerCase() + "');";
-                    query (sql); 
+                    query (sql);
                 }
             }
         });
@@ -114,8 +114,10 @@ module.exports = {
                     point: point,
                     topHash: top.name,
                     topPoint: top.point,
-                    Title: 'Twitter Hashtag Search'
+                    title: 'Twitter Hashtag Search',
+                    search_hashtag: search
                   }
+                  console.log(top);
                   res.render('twitterGraph', send);
             }
         });

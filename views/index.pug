@@ -1,28 +1,18 @@
 extends layout
 
 block content  
-  h1 #{Title}
-  br
-  
-  div  
-    .container
-    .row
-    form(method="GET", action="", id="FormSearch")  
-      .col-xs-8.col-xs-offset-2
-        .input-group
-          .input-group-btn.search-panel
-            //-         
-            //- button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
-            //-   span#search_hashtag Search Type
-            //-   span.caret
-            //- ul.dropdown-menu(role='menu' , id= 'menu')
-            //-   li
-            //-     a(href='#Graph') Graph
-            //-   li
-            //-     a(href='#Stream') Stream
-          input#search_param(type='hidden', value='Search Hashtag')
-          input.form-control(type='text', id='search', name='q', placeholder='Search term eg. DonaldTrump', onKeyUp='textCheck();')
-          span.input-group-btn
-            input.btn.btn-default(type='button', value='Search', id='SearchButton', disabled, onclick='submiter();')
-            span.glyphicon.glyphicon-search
-          input(type='submit', style='display:none;', id='submits')
+  h1 #{title}
+    br
+    div  
+      .container  
+      .row
+      form(method="GET", action="/Graph", id="FormSearch")  
+        .col-xs-8.col-xs-offset-2
+          .input-group
+            .input-group-btn.search-panel
+            input#search_param(type='hidden', value='Search Hashtag')
+            input.form-control(type='text', id='search', name='q', placeholder='Search term eg. DonaldTrump', onKeyUp='textCheck();')
+            span.input-group-btn
+              input.btn.btn-default(type='button', value='Search', id='SearchButton', disabled, onclick='submiter();')
+              span.glyphicon.glyphicon-search
+            input(type='submit', style='display:none;', id='submits')
