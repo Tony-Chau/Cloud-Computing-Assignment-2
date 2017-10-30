@@ -58,7 +58,7 @@ module.exports = {
                 var SameID = [];
                 for (var i = 0; i < result.length; i += 1){
                     for (var j = 0; j < twitterHashID.length; j += 1){
-                        if (result[i].name == twitterHashID[j]){
+                        if (result[i].Name == twitterHashID[j]){
                             SameID.push(twitterHashID[j]);
                         }
                     }
@@ -85,6 +85,7 @@ module.exports = {
     getHashName: function(search, res){
         var sql = "SELECT * FROM `tonychau_twitterstream`.`" + search.toLowerCase() + "`;";
         con.query(sql, function (err, result){
+            console.log('Step 2');
             if (err){
                 throw err;
             }else{

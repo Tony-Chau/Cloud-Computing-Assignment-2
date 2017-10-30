@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Tony-Chau/Cloud-Computing-Assignment-2#readme",
   "dependencies": {
+    "array-sort": "^0.1.4",
     "body-parser": "^1.18.2",
     "dateformat": "^3.0.2",
     "express": "^4.16.2",
