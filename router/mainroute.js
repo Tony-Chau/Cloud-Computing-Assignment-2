@@ -11,11 +11,10 @@ router.get('/', function(req, res){
   });
 });
 
-var listSearch = []
 
 router.get('/Graph', function(req, res){
   if (tool.isset(req.query.q)){
-    listSearch.push(req.query.q);
+    app.locals.query = req.query.q;
     MySqlServer.Connect();
     twitter.search(req, res);
     setTimeout(function() {
@@ -32,7 +31,7 @@ router.get('/Graph', function(req, res){
 
 router.get('/GetQueries', function(req, res){
   MySqlServer.Connect();
-  var query = listSearch[-1];
+  var query = app.locals.query;
   MySqlServer.getHashName(req.query.q, res);
 });
 
