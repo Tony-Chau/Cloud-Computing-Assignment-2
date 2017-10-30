@@ -11,8 +11,7 @@ block content
           .input-group
             .input-group-btn.search-panel
             input#search_param(type='hidden', value='Search Hashtag')
-            input.form-control(type='text', id='search', name='q', placeholder='Search term eg. DonaldTrump', onKeyUp='textCheck();')
+            input.form-control(type='text', id='search', name='q', placeholder='Search term eg. DonaldTrump', required)
             span.input-group-btn
-              input.btn.btn-default(type='button', value='Search', id='SearchButton', disabled, onclick='submiter();')
+              input.btn.btn-default(type='submit', value='Search')
               span.glyphicon.glyphicon-search
-            input(type='submit', style='display:none;', id='submits')

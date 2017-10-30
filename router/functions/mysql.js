@@ -44,10 +44,8 @@ module.exports = {
                     var sql = "CREATE TABLE  `tonychau_twitterstream`.`" + lowerCase(search) + "` ";
                     sql += "(TwitterID VARCHAR(255) NOT NULL, Name VARCHAR(255) NOT NULL, Time DATETIME NOT NULL);";
                     query(sql);
-                    console.log(sql);
                     sql = "INSERT INTO `tonychau_twitterstream`.`SearchTable` (Name) VALUE ('" + lowerCase(search) + "');";
                     query (sql);
-                    console.log(sql);
                 }
             }
         });
