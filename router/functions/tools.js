@@ -58,7 +58,6 @@ module.exports = {
         }
         arraySort(top, 'point');
         top.reverse();
-        console.log(top);
         return top;
     },
     fixRanking: function(rank, length){

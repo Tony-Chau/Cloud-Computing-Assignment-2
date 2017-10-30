@@ -106,7 +106,6 @@ module.exports = {
                   var top = tool.Top10Search(rank);
                   rank = tool.fixRanking(rank, entry.length);
                   console.log('step 5');
-                  console.log(rank.name[i]);
                   var send = {
                     hash: rank.name,
                     point: rank.point,

@@ -9,7 +9,7 @@ setInterval(function(){
     createGraph(data);
     });
     loadBarTimer();
-  }, 60000);
+  }, 30000);
 }
 window.onload = function(){
   getData();
