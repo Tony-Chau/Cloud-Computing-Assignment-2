@@ -15,21 +15,18 @@ function createGraph(data){
 
   var data = [twitterGraph];
   var layout = {barmode: 'group', width: (window.innerWidth/1.3), height: (window.innerHeight/1.3)};
-
   Plotly.newPlot(graphObject, data, layout);
-  $('#twitterDiv').html(twitterTable(data));
+  $('#twitterDiv').html(twitterTable(data[0].x, data[0].y));
 }
 
-function twitterTable(data){
+function twitterTable(topHash, topPoint){
   var graphObject = document.getElementById('twitterDiv');
-  alert(data.topHash);
-  var s = "";
-  s = '<table class="table table-boardered">';
+  var s = '<h1>Hashtag Result</h1><table class="table table-boardered">';
   s += '<thread>';
   s += '<tr>';
   s += '<th>Ranking</th>';
   s += '<th>Top Hashtag</th>';
-  s += '<th>Hastage Frequency</th>';
+  s += '<th>Number of "#" Calls</th>';
   s += '</tr>';
   s += '</thread>';
   s += '<tbody>';
@@ -37,8 +34,8 @@ function twitterTable(data){
   for (var i=0; i < 10; i++){
     s += '<tr>';
     s += '<td>' + (i+1) + '</td>';
-    s += '<td>' + data.topHash[i] + '</td>';
-    s += '<td>' + data.topPoint[i] + '</td>';
+    s += '<td>' + topHash[i] + '</td>';
+    s += '<td>' + topPoint[i] + '</td>';
     s += '</tr>';
   }
   s += '</tbody>';
