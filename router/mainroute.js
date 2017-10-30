@@ -14,28 +14,23 @@ router.get('/', function(req, res){
 
 router.get('/Graph', function(req, res){
   if (tool.isset(req.query.q)){
-    app.locals.query = req.query.q;
     MySqlServer.Connect();
-    twitter.search(req.query.q);
-    setTimeout(function() {
-      res.render('twitterGraph', {
-        Title: 'Twitter Hashtag Search',
-        search_hashtag: req.query.q
-      });
-    }, 20000);
-    
-
+    res.render('twitterGraph', {
+      Title: 'Twitter Hashtag Search',
+      search_hashtag: req.query.q
+    });
   }
   tool.errorpage(req, res);
 });
 
 router.get('/GetQueries', function(req, res){
-  var query = app.locals.query;
-  twitter.search(query);
-  setTimeout(function() {
-    MySqlServer.getHashName(query, res);
-  }, 20000);
-  
+  if (tool.isset(req.query.q)){
+    var query = req.query.q;
+    twitter.search(query);
+    setTimeout(function() {
+      MySqlServer.getHashName(query, res);
+    }, 20000);
+  }
 });
 
 module.exports = router;

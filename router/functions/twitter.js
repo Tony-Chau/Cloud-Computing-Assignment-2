@@ -37,11 +37,11 @@ module.exports = {
         var datetime = tool.convertDateTimeToString(date[twitterHashID[i]]);
         twitterHashDate.push(datetime);
       }
-      console.log('step 3');
+      console.log('step 1');
       setTimeout(function() {
         mysql.InsertHash(query, length, HashName, twitterHashID, twitterHashDate);  
-        console.log('step 4'); 
-      }, 5000);
+        console.log('step 2'); 
+      }, 7000);
       
       //res.send(data);     
     });

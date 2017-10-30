@@ -1,8 +1,18 @@
-onload = function getData(){
-  $.get('/GetQueries', function (data){
-      createGraph(data);
-  });
-  loadBarTimer();
+function getData(){
+  var q = document.getElementById('query').value;
+  $.get('/GetQueries?q=' + q, function (data){
+    createGraph(data);
+    });
+    loadBarTimer();
+setInterval(function(){
+  $.get('/GetQueries?q=' + q, function (data){
+    createGraph(data);
+    });
+    loadBarTimer();
+  }, 60000);
+}
+window.onload = function(){
+  getData();
 }
 
 function createGraph(data){
@@ -14,13 +24,13 @@ function createGraph(data){
     type: 'bar'
   };
 
-  var data = [twitterGraph];
+  var twitterData = [twitterGraph];
   var layout = {barmode: 'group', width: (window.innerWidth/1.3), height: (window.innerHeight/1.3)};
-  Plotly.newPlot(graphObject, data, layout);
-  $('#twitterDiv').html(twitterTable(data[0].x, data[0].y));
+  Plotly.newPlot(graphObject, twitterData, layout);
+  $('#twitterDiv').html(twitterTable(data.hash, data.point));
 }
 
-function twitterTable(topHash, topPoint){
+function twitterTable(Hash, Point){
   var graphObject = document.getElementById('twitterDiv');
   var s = '<h1>Hashtag Result</h1><table class="table table-boardered">';
   s += '<thread>';
@@ -32,11 +42,11 @@ function twitterTable(topHash, topPoint){
   s += '</thread>';
   s += '<tbody>';
 
-  for (var i=0; i < 10; i++){
+  for (var i=0; i < Hash.length; i++){
     s += '<tr>';
     s += '<td>' + (i+1) + '</td>';
-    s += '<td>' + topHash[i] + '</td>';
-    s += '<td>' + topPoint[i] + '</td>';
+    s += '<td>' + Hash[i] + '</td>';
+    s += '<td>' + Point[i] + '</td>';
     s += '</tr>';
   }
   s += '</tbody>';

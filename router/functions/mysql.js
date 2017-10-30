@@ -44,8 +44,10 @@ module.exports = {
                     var sql = "CREATE TABLE  `tonychau_twitterstream`.`" + lowerCase(search) + "` ";
                     sql += "(TwitterID VARCHAR(255) NOT NULL, Name VARCHAR(255) NOT NULL, Time DATETIME NOT NULL);";
                     query(sql);
-                    sql = "INSERT INTO `tonychau_twitterstream`.`SearchTable` (name) VALUE ('" + lowerCase(search) + "');";
+                    console.log(sql);
+                    sql = "INSERT INTO `tonychau_twitterstream`.`SearchTable` (Name) VALUE ('" + lowerCase(search) + "');";
                     query (sql);
+                    console.log(sql);
                 }
             }
         });
@@ -75,7 +77,7 @@ module.exports = {
     getHashName: function(search, res){
         var sql = "SELECT * FROM `tonychau_twitterstream`.`" + lowerCase(search) + "`;";
         con.query(sql, function (err, result){
-            console.log('Step 2');
+            console.log('Step 3');
             if (err){
                 throw err;
             }else{
@@ -86,7 +88,7 @@ module.exports = {
                 var entry = array.filter(function(elem, index, self){
                     return index == self.indexOf(elem);
                 });
-                console.log('step 3');
+                console.log('step 4');
                   var point = [entry.length];
                   for (var i = 0; i < entry.length; i += 1){
                     point[i] = 0;
@@ -102,7 +104,9 @@ module.exports = {
                   }
                   var rank = tool.Ranking(entry, point);
                   var top = tool.Top10Search(rank);
-                  console.log('step 3');
+                  rank = tool.fixRanking(rank, entry.length);
+                  console.log('step 5');
+                  console.log(rank.name[i]);
                   var send = {
                     hash: rank.name,
                     point: rank.point,
