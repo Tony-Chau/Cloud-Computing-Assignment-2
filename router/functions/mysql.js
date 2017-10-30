@@ -55,21 +55,10 @@ module.exports = {
             if (err){
                 throw err;
             }else{
-                var SameID = [];
-                for (var i = 0; i < result.length; i += 1){
-                    for (var j = 0; j < twitterHashID.length; j += 1){
-                        if (result[i].Name == twitterHashID[j]){
-                            SameID.push(twitterHashID[j]);
-                        }
-                    }
-                }
-                var newSameID = SameID.filter(function(elem, index, self){
-                    return index == self.indexOf(elem);
-                });
                 for (var i = 0; i < twitterHashID.length; i += 1){
                     var check = true;
-                    for (var j = 0; j < newSameID.length; j += 1){
-                        if (newSameID[j] == twitterHashID[i]){
+                    for (var j = 0; j < result.length; j += 1){
+                        if (twitterHashID[i] == result[j].Name){
                             check = false;
                         }
                     }
