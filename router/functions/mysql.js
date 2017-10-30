@@ -59,7 +59,7 @@ module.exports = {
                 for (var i = 0; i < twitterHashID.length; i += 1){
                     var check = true;
                     for (var j = 0; j < result.length; j += 1){
-                        if (twitterHashID[i] == result[j].Name){
+                        if (twitterHashID[i] == result[j].TwitterID){
                             check = false;
                         }
                     }

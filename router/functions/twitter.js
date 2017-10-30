@@ -9,11 +9,12 @@ const tool = require('./tools.js');
 const mysql = require('./mysql.js');
 
 module.exports = {
-  search: function (req){
-    var query = req.query.q;
+  search: function (query){
     var hash = '#' + query; //(or %23)
     mysql.CreateTable(query);
+    console.log('step 1');
     twitter.get('search/tweets', { q: hash, count: 100, lang: 'en' }, function(err, data, response) {
+      console.log('step 2');
       var length = data.statuses.length;
       var text = data.statuses[0].text;
       var HashName = [];
@@ -38,8 +39,10 @@ module.exports = {
         var datetime = tool.convertDateTimeToString(date[twitterHashID[i]]);
         twitterHashDate.push(datetime);
       }
+      console.log('step 3');
       setTimeout(function() {
-        mysql.InsertHash(query, length, HashName, twitterHashID, twitterHashDate);   
+        mysql.InsertHash(query, length, HashName, twitterHashID, twitterHashDate);  
+        console.log('step 4'); 
       }, 5000);
       
       //res.send(data);     
