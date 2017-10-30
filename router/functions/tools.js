@@ -56,42 +56,5 @@ module.exports = {
             name: top10Name,
             point: top10Point
         }
-        // var top = [10];
-        // var topIndex = [10];
-        // for (var i = 0; i < 10; i+= 1) {
-        //     top[i] = 0;
-        //     topIndex[i] = -1;
-        // }
-        // top[0] = point[0];
-        // var max = 0;
-        // for (var i = 0; i < point.length; i += 1){
-        //     max = point[i];
-        //     for (var j = 0; j < point.length; j += 1){
-        //         if (i != j){
-        //             if (point[j] > point[i]){
-        //                 var check = true;
-        //                 for (var k = 0; k < top.length; k += 1){
-        //                     if (top[k] == j){
-        //                         check = false;
-        //                     }
-        //                 }
-        //                 if (check){
-        //                     top[i] = i;
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-
-        var assignNames = [10];
-        var assignPoint = [10];
-        for(var i = 0; i < 10; i += 1){
-            assignNames[i] = name[top[i]];
-            assignPoint[i] = point[top[i]];
-        } 
-        return {
-            name: assignNames,
-            point: assignPoint
-        }
     }
 }

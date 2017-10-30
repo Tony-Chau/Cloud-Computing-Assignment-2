@@ -1,4 +1,26 @@
-var graphObject = document.getElementById('graphDiv');
+onload = function getData(){
+  $.get('/GetQueries', function (data){
+      createGraph(data);
+  });
+}
+
+function createGraph(data){
+  var graphObject = document.getElementById('graphDiv');
+  var twitterGraph = {
+    x: topHash,
+    y: topPoint,
+    name: 'Top 10 Hashtag Search',
+    type: 'bar'
+  };
+  
+  
+  var data = [twitterGraph];
+  
+  var layout = {barmode: 'group', width: (window.innerWidth/1.3), height: (window.innerHeight/1.4)};
+  
+  Plotly.newPlot(graphObject, data, layout);
+}
+
 
 function getSearch(send){
   var topHash= x[i];
@@ -12,16 +34,4 @@ function getSearch(send){
 //   type: 'bar'
 // };
 
-var twitterGraph = {
-  x: topHash,
-  y: topPoint,
-  name: 'Top 10 Hashtag Search',
-  type: 'bar'
-};
 
-
-var data = [twitterGraph];
-
-var layout = {barmode: 'group', width: (window.innerWidth/1.3), height: (window.innerHeight/1.4)};
-
-Plotly.newPlot(graphObject, data, layout);

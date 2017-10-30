@@ -103,13 +103,11 @@ module.exports = {
                     hash: entry,
                     point: point,
                     topHash: top.name,
-                    topPoint: top.point,
-                    title: 'Twitter Hashtag Search',
-                    search_hashtag: search
+                    topPoint: top.point
                   }
-                  console.log(top);
-                  res.render('twitterGraph', send);
+                  res.json(send);
             }
         });
-    }
+    },
+
 }
