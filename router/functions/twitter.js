@@ -14,7 +14,6 @@ module.exports = {
     mysql.CreateTable(query);
     twitter.get('search/tweets', { q: hash, count: 100, lang: 'en' }, function(err, data, response) {
       var length = data.statuses.length;
-      var text = data.statuses[0].text;
       var HashName = [];
       var twitterHashID = [];
       var date = [];

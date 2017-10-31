@@ -5,6 +5,7 @@ const MySqlServer = require('./functions/mysql.js');
 const twitter = require('./functions/twitter.js');
 const tool = require('./functions/tools.js');
 MySqlServer.Connect();
+
 router.get('/', function(req, res){
   res.render('index', {
     Title: 'Twitter Hashtag Search',
@@ -30,6 +31,10 @@ router.get('/GetQueries', function(req, res){
       MySqlServer.getHashName(query, res);
     }, 60000);
   }
+});
+
+router.get('/error', function (req, res){
+  res.render('error');
 });
 
 module.exports = router;

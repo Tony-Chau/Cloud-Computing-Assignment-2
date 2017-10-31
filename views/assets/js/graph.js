@@ -16,6 +16,9 @@ window.onload = function(){
 }
 
 function createGraph(data){
+  if (data.point == undefined){
+    window.location.href = '/error';    
+  }
   var graphObject = document.getElementById('graphDiv');
   var twitterGraph = {
     x: data.topHash,

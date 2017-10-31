@@ -8,7 +8,7 @@ module.exports = {
           return true;
     },
     errorpage : function (req, res){
-        //Make the error page
+        req.render('error');
     },
     ChangeSymbol: function(val){
         return val.toString('utf8');
@@ -36,10 +36,14 @@ module.exports = {
         }
         return newText;
     },
-    Top10Search: function (rank){
+    Top10Search: function (rank, length){
+        var row = 10;
+        if (length < 10){
+            row = length
+        }
         var top10Name = [];
         var top10Point = [];
-        for (var i = 0 ; i < 10; i += 1){
+        for (var i = 0 ; i < row; i += 1){
             top10Name.push(rank[i].name);
             top10Point.push(rank[i].point);
         }

@@ -79,38 +79,48 @@ module.exports = {
             if (err){
                 throw err;
             }else{
-                var array = [result.length];
-                for (var i = 0; i < result.length; i += 1){
-                    array.push(result[i].Name);
-                }
-                var entry = array.filter(function(elem, index, self){
-                    return index == self.indexOf(elem);
-                });
-                console.log('step 4');
-                  var point = [entry.length];
-                  for (var i = 0; i < entry.length; i += 1){
-                    point[i] = 0;
-                  }
-                  for (var i = 0; i < entry.length; i += 1){
-                    var increment = 0;
-                    for (var j = 0; j < array.length; j += 1){
-                      if (array[j] == entry[i]){
-                        increment += 1;
-                      }
+                if (result.length > 0){
+                    var array = [result.length];
+                    for (var i = 0; i < result.length; i += 1){
+                        array.push(result[i].Name);
                     }
-                    point[i] += increment;
-                  }
-                  var rank = tool.Ranking(entry, point);
-                  var top = tool.Top10Search(rank);
-                  rank = tool.fixRanking(rank, entry.length);
-                  console.log('step 5');
-                  var send = {
-                    hash: rank.name,
-                    point: rank.point,
-                    topHash: top.name,
-                    topPoint: top.point
-                  }
-                  res.json(send);
+                    var entry = array.filter(function(elem, index, self){
+                        return index == self.indexOf(elem);
+                    });
+                    console.log('step 4');
+                      var point = [entry.length];
+                      for (var i = 0; i < entry.length; i += 1){
+                        point[i] = 0;
+                      }
+                      for (var i = 0; i < entry.length; i += 1){
+                        var increment = 0;
+                        for (var j = 0; j < array.length; j += 1){
+                          if (array[j] == entry[i]){
+                            increment += 1;
+                          }
+                        }
+                        point[i] += increment;
+                      }
+                      var rank = tool.Ranking(entry, point);
+                      var top = tool.Top10Search(rank, result.length);
+                      rank = tool.fixRanking(rank, entry.length);
+                      console.log('step 5');
+                      var send = {
+                        hash: rank.name,
+                        point: rank.point,
+                        topHash: top.name,
+                        topPoint: top.point
+                      }
+                      res.json(send);
+                }else{
+                    send = {
+                        hash: undefined,
+                        point: undefined,
+                        topHash: undefined,
+                        topPoint: undefined
+                    }
+                    res.json(send);
+                }
             }
         });
     },
