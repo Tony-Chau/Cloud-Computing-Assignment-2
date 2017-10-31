@@ -83,7 +83,8 @@ function tabMenu(evt, graphType) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     document.getElementById(graphType).style.display = "block";
-    $('#' + graphType).addClass("active");
+    document.getElementById(graphType.replace('Div', 'tab')).classList.add('active');
+    // evt.currentTarget.className += 'active';
 }
 
 function twitterTable(Hash, Point){
@@ -129,4 +130,4 @@ function loadBarTimer() {
 window.onload = function(){
   getData();
 }
-$('#bar').click();
+$('#barGraphtab').click();
