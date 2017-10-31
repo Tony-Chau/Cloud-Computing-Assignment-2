@@ -4,7 +4,7 @@ const router = express.Router();
 const MySqlServer = require('./functions/mysql.js');
 const twitter = require('./functions/twitter.js');
 const tool = require('./functions/tools.js');
-
+MySqlServer.Connect();
 router.get('/', function(req, res){
   res.render('index', {
     Title: 'Twitter Hashtag Search',
@@ -14,7 +14,6 @@ router.get('/', function(req, res){
 
 router.get('/Graph', function(req, res){
   if (tool.isset(req.query.q)){
-    MySqlServer.Connect();
     res.render('twitterGraph', {
       Title: 'Twitter Hashtag Search',
       search_hashtag: req.query.q
