@@ -19,8 +19,9 @@ router.get('/Graph', function(req, res){
       Title: 'Twitter Hashtag Search',
       search_hashtag: req.query.q
     });
+  }else{
+    tool.errorpage(req, res);
   }
-  tool.errorpage(req, res);
 });
 
 router.get('/GetQueries', function(req, res){

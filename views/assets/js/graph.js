@@ -2,19 +2,37 @@ function getData(){
   var q = document.getElementById('query').value;
   $.get('/GetQueries?q=' + q, function (data){
     createBarGraph(data);
+    createhorBarGraph(data)
     createPieGraph(data);
     });
     loadBarTimer();
 setInterval(function(){
   $.get('/GetQueries?q=' + q, function (data){
     createBarGraph(data);
+    createhorBarGraph(data)
     createPieGraph(data);
     });
     //loadBarTimer();
   }, 60000);
 }
-window.onload = function(){
-  getData();
+
+function createhorBarGraph(data){
+  if (data.point == undefined){
+    window.location.href = '/error';
+  }
+  var graphObject = document.getElementById('horbarGraphDiv');
+  var twitterGraph = {
+    x: (data.topPoint).reverse(),
+    y: (data.topHash).reverse(),
+    title: 'top ' + data.topPoint.length + ' horizontal bar graph for ' + document.getElementById('query').value,
+    type: 'bar',
+    orientation: 'h'
+  };
+
+  var twitterData = [twitterGraph];
+  var layout = {barmode: 'group', width: (window.innerWidth/1.3), height: (window.innerHeight/1.3)};
+  Plotly.newPlot(graphObject, twitterData, layout);
+  $('#twitterDiv').html(twitterTable(data.hash, data.point));
 }
 
 function createBarGraph(data){
@@ -25,7 +43,7 @@ function createBarGraph(data){
   var twitterGraph = {
     x: data.topHash,
     y: data.topPoint,
-    name: 'Top 10 Hashtag Search',
+    title: 'top ' + data.topPoint.length + ' bar graph for ' + document.getElementById('query').value,
     type: 'bar'
   };
 
@@ -65,7 +83,7 @@ function tabMenu(evt, graphType) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     document.getElementById(graphType).style.display = "block";
-    evt.currentTarget.className += " active";
+    $('#' + graphType).addClass("active");
 }
 
 function twitterTable(Hash, Point){
@@ -108,3 +126,7 @@ function loadBarTimer() {
     }
   }
 }
+window.onload = function(){
+  getData();
+}
+$('#bar').click();

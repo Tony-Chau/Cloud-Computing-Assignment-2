@@ -9,10 +9,12 @@ block content
     //- #horizontalBarGraphDiv(style="margin-left: -80px")
       
     .tab
-      button.tablinks(onclick="tabMenu(event, 'barGraphDiv')") Bar Graph
+      button.tablinks(onclick="tabMenu(event, 'barGraphDiv')" id='bar') Bar Graph
+      button.tablinks(onclick="tabMenu(event, 'horbarGraphDiv')") Horizontal Bar Graph
       button.tablinks(onclick="tabMenu(event, 'pieGraphDiv')") Pie Graph
 
     #barGraphDiv.tabcontent
+    #horbarGraphDiv.tabcontent
     #pieGraphDiv.tabcontent
     
     #twitterDiv  
