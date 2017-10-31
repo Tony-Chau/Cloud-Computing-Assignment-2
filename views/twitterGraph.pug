@@ -5,7 +5,16 @@ block content
   h3 Top 10 Hashtag Graph Search for #{search_hashtag}
     #myProgress
       #loadBar
-    #graphDiv(style="margin-left: -80px")
+
+    //- #horizontalBarGraphDiv(style="margin-left: -80px")
+      
+    .tab
+      button.tablinks(onclick="tabMenu(event, 'barGraphDiv')") Bar Graph
+      button.tablinks(onclick="tabMenu(event, 'pieGraphDiv')") Pie Graph
+
+    #barGraphDiv.tabcontent
+    #pieGraphDiv.tabcontent
+    
     #twitterDiv  
     input(type='text', style='display:none;', value=search_hashtag, id='query')
     

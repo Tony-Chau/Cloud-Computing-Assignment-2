@@ -1,12 +1,14 @@
 function getData(){
   var q = document.getElementById('query').value;
   $.get('/GetQueries?q=' + q, function (data){
-    createGraph(data);
+    createBarGraph(data);
+    createPieGraph(data);
     });
     loadBarTimer();
 setInterval(function(){
   $.get('/GetQueries?q=' + q, function (data){
-    createGraph(data);
+    createBarGraph(data);
+    createPieGraph(data);
     });
     //loadBarTimer();
   }, 60000);
@@ -15,11 +17,11 @@ window.onload = function(){
   getData();
 }
 
-function createGraph(data){
+function createBarGraph(data){
   if (data.point == undefined){
-    window.location.href = '/error';    
+    window.location.href = '/error';
   }
-  var graphObject = document.getElementById('graphDiv');
+  var graphObject = document.getElementById('barGraphDiv');
   var twitterGraph = {
     x: data.topHash,
     y: data.topPoint,
@@ -31,6 +33,39 @@ function createGraph(data){
   var layout = {barmode: 'group', width: (window.innerWidth/1.3), height: (window.innerHeight/1.3)};
   Plotly.newPlot(graphObject, twitterData, layout);
   $('#twitterDiv').html(twitterTable(data.hash, data.point));
+}
+
+function createPieGraph(data){
+  if (data.point == undefined){
+    window.location.href = '/error';
+  }
+  var graphObject = document.getElementById('pieGraphDiv');
+  var twitterGraph = {
+    labels: data.topHash,
+    values: data.topPoint,
+    name: 'Top 10 Hashtag Search',
+    type: 'pie'
+  };
+
+  var twitterData = [twitterGraph];
+  var layout = {barmode: 'group', width: (window.innerWidth/1.3), height: (window.innerHeight/1.2)};
+  Plotly.newPlot(graphObject, twitterData, layout);
+  $('#twitterDiv').html(twitterTable(data.hash, data.point));
+}
+
+// got from https://www.w3schools.com/howto/howto_js_tabs.asp
+function tabMenu(evt, graphType) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(graphType).style.display = "block";
+    evt.currentTarget.className += " active";
 }
 
 function twitterTable(Hash, Point){
@@ -58,8 +93,7 @@ function twitterTable(Hash, Point){
 }
 
 
-//Taken from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_progressbar_3
-
+// Taken from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_progressbar_3
 function loadBarTimer() {
   var elem = document.getElementById("loadBar");
   var width = 1;

@@ -8,7 +8,7 @@ module.exports = {
           return true;
     },
     errorpage : function (req, res){
-        req.render('error');
+        res.render('error');
     },
     ChangeSymbol: function(val){
         return val.toString('utf8');
@@ -17,7 +17,7 @@ module.exports = {
         return dateFormat(date, 'yyyy-mm-dd hh:mm:ss');
     },
     ArrayTextFix: function(textArray){
-        var newText = []; 
+        var newText = [];
         for(var i = 0; i < textArray.length; i += 1){
             var s = textArray[i];
              s = s.replace(/'/gi,'%27');
@@ -27,7 +27,7 @@ module.exports = {
         return newText;
     },
     RemoveHtmlEncoding: function(textArray){
-        var newText = []; 
+        var newText = [];
         for (var i = 0; i < textArray.length; i += 1){
             var s = textArray[i];
             s = s.replace(/%27/, '\'');
