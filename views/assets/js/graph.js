@@ -8,8 +8,8 @@ setInterval(function(){
   $.get('/GetQueries?q=' + q, function (data){
     createGraph(data);
     });
-    loadBarTimer();
-  }, 30000);
+    //loadBarTimer();
+  }, 60000);
 }
 window.onload = function(){
   getData();
@@ -60,7 +60,7 @@ function twitterTable(Hash, Point){
 function loadBarTimer() {
   var elem = document.getElementById("loadBar");
   var width = 1;
-  var id = setInterval(frame, 200);
+  var id = setInterval(frame, 600);
   function frame() {
     if (width >= 100) {
       clearInterval(id);

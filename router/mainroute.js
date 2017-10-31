@@ -28,7 +28,7 @@ router.get('/GetQueries', function(req, res){
     twitter.search(query);
     setTimeout(function() {
       MySqlServer.getHashName(query, res);
-    }, 20000);
+    }, 60000);
   }
 });
 
