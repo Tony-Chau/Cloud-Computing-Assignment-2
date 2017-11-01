@@ -35,7 +35,7 @@ router.get('/GetQueries', function(req, res){
     setTimeout(function() {
       //Goes to the database 
       MySqlServer.getHashName(query, res);
-    }, 60000);
+    }, 6000);
   }
 });
 

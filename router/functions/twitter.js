@@ -43,7 +43,7 @@ module.exports = {
         //Insert the hashtag data to the mysql table
         mysql.InsertHash(query, length, HashName, twitterHashID, twitterHashDate);  
         console.log('step 2'); 
-      }, 7000);
+      }, 2000);
       
       //res.send(data);     
     });
