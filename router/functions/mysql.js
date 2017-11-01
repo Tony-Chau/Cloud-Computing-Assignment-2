@@ -112,7 +112,7 @@ module.exports = {
                       //orders the array
                       var rank = tool.Ranking(entry, point);
                       //Find the top 10 search, but if less than varies depending on the result length
-                      var top = tool.Top10Search(rank, result.length);
+                      var top = tool.Top10Search(rank, entry.length);
                       //fixes up the rank glitch
                       rank = tool.fixRanking(rank, entry.length);
                       console.log('step 5');
