@@ -109,15 +109,6 @@ module.exports = {
                         }
                         point[i] += increment;
                       }
-                      var counter = 0;
-                      setInterval(function(){
-                        var counter = 0;
-                        con.query(sql, function (err, result){
-                            for (var i = 0; i < result.length; i += 1){
-                                counter += 1;
-                            }
-                        });
-                      }, 10);
                       //orders the array
                       var rank = tool.Ranking(entry, point);
                       //Find the top 10 search, but if less than varies depending on the result length
