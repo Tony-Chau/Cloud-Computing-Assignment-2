@@ -16,6 +16,7 @@ setInterval(function(){
   }, 2000);
 }
 
+//Generate Horizontal Bar Graph
 function createhorBarGraph(data){
   if (data.point == undefined){
     window.location.href = '/error';
@@ -35,6 +36,7 @@ function createhorBarGraph(data){
   $('#twitterDiv').html(twitterTable(data.hash, data.point));
 }
 
+//Generate Bar Graph
 function createBarGraph(data){
   if (data.point == undefined){
     window.location.href = '/error';
@@ -53,6 +55,7 @@ function createBarGraph(data){
   $('#twitterDiv').html(twitterTable(data.hash, data.point));
 }
 
+//Generate Pie Graph
 function createPieGraph(data){
   if (data.point == undefined){
     window.location.href = '/error';
@@ -71,6 +74,7 @@ function createPieGraph(data){
   $('#twitterDiv').html(twitterTable(data.hash, data.point));
 }
 
+//Functionality for tab bar
 // got from https://www.w3schools.com/howto/howto_js_tabs.asp
 function tabMenu(evt, graphType) {
     var i, tabcontent, tablinks;
@@ -87,6 +91,7 @@ function tabMenu(evt, graphType) {
     // evt.currentTarget.className += 'active';
 }
 
+//Generates table list of hashtag ranking
 function twitterTable(Hash, Point){
   var graphObject = document.getElementById('twitterDiv');
   var s = '<h1>Hashtag Result</h1><table class="table table-boardered">';
@@ -111,7 +116,7 @@ function twitterTable(Hash, Point){
   return s
 }
 
-
+//Loading bar functionality
 // Taken from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_progressbar_3
 function loadBarTimer() {
   var elem = document.getElementById("loadBar");
@@ -127,7 +132,9 @@ function loadBarTimer() {
     }
   }
 }
+//calls the getData function when window onload
 window.onload = function(){
   getData();
 }
+//sets the bargraphtab active
 $('#barGraphtab').click();
