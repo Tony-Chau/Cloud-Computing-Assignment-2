@@ -14,7 +14,7 @@ interval = setInterval(function(){
     createPieGraph(data);
     });
     //loadBarTimer();
-  }, 2000);
+  }, 1);
 }
 
 //Generate Horizontal Bar Graph
