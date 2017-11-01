@@ -11,6 +11,7 @@ const mysql = require('./mysql.js');
 module.exports = {
   search: function (query){
     var hash = '#' + query; //(or %23)
+    //Creates the table based on the query (or ignore creating a table if the table already exist)
     mysql.CreateTable(query);
     twitter.get('search/tweets', { q: hash, count: 100, lang: 'en' }, function(err, data, response) {
       var length = data.statuses.length;
@@ -37,7 +38,9 @@ module.exports = {
         twitterHashDate.push(datetime);
       }
       console.log('step 1');
+      //Give it some time for the create table to process
       setTimeout(function() {
+        //Insert the hashtag data to the mysql table
         mysql.InsertHash(query, length, HashName, twitterHashID, twitterHashDate);  
         console.log('step 2'); 
       }, 7000);

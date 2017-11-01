@@ -14,6 +14,7 @@ router.get('/', function(req, res){
 
 
 router.get('/Graph', function(req, res){
+  //Checks if a query is present
   if (tool.isset(req.query.q)){
     res.render('twitterGraph', {
       Title: 'Twitter Hashtag Search',
@@ -25,10 +26,14 @@ router.get('/Graph', function(req, res){
 });
 
 router.get('/GetQueries', function(req, res){
+  //Checks if a query is present
   if (tool.isset(req.query.q)){
     var query = req.query.q;
+    //Calls the twitter api and puts the new info (if any) into the database (please check twitter.js)
     twitter.search(query);
+    //Allow the sql to complete its task
     setTimeout(function() {
+      //Goes to the database 
       MySqlServer.getHashName(query, res);
     }, 60000);
   }
