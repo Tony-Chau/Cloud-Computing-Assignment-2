@@ -14,7 +14,7 @@ interval = setInterval(function(){
     createPieGraph(data);
     });
     //loadBarTimer();
-  }, 0.5);
+  }, 1);
 }
 
 //Generate Horizontal Bar Graph
@@ -137,6 +137,6 @@ function loadBarTimer() {
 window.onload = function(){
   getData();
 }
-window.onunload = clearInterval(interval); 
+window.onunload = clearInterval(interval);
 //sets the bargraphtab active
 $('#barGraphtab').click();
