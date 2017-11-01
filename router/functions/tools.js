@@ -56,7 +56,7 @@ module.exports = {
         var top = [name.length];
         for (var i = 0; i < name.length; i += 1){
             top[i] = {
-                name: name[i],
+                name: '#' + name[i],
                 point: point[i]
             }
         }

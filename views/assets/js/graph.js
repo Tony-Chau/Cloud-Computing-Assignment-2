@@ -1,3 +1,4 @@
+var interval;
 function getData(){
   var q = document.getElementById('query').value;
   $.get('/GetQueries?q=' + q, function (data){
@@ -6,7 +7,7 @@ function getData(){
     createPieGraph(data);
     });
     loadBarTimer();
-setInterval(function(){
+interval = setInterval(function(){
   $.get('/GetQueries?q=' + q, function (data){
     createBarGraph(data);
     createhorBarGraph(data);
@@ -136,5 +137,6 @@ function loadBarTimer() {
 window.onload = function(){
   getData();
 }
+window.onunload = clearInterval(interval); 
 //sets the bargraphtab active
 $('#barGraphtab').click();
