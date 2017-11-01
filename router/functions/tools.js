@@ -38,8 +38,8 @@ module.exports = {
     },
     Top10Search: function (rank, length){
         var row = 10;
-        if (length < 10){
-            row = length
+        if (10 > length){
+            row = length;
         }
         var top10Name = [];
         var top10Point = [];
