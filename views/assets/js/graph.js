@@ -13,7 +13,7 @@ setInterval(function(){
     createPieGraph(data);
     });
     //loadBarTimer();
-  }, 60000);
+  }, 2000);
 }
 
 function createhorBarGraph(data){

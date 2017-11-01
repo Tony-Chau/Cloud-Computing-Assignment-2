@@ -3,22 +3,22 @@ extends layout
 block content    
   h1 #{title}
   h3 Top 10 Hashtag Graph Search for #{search_hashtag}
-    #myProgress
-      #loadBar
+  #myProgress
+    #loadBar
 
     //- #horizontalBarGraphDiv(style="margin-left: -80px")
-      
-    .tab
-      button.tablinks(onclick="tabMenu(event, 'barGraphDiv')", id='barGraphtab') Bar Graph
-      button.tablinks(onclick="tabMenu(event, 'horbarGraphDiv')", id='horbarGraphtab') Horizontal Bar Graph
-      button.tablinks(onclick="tabMenu(event, 'pieGraphDiv')", id='pieGraphtab') Pie Graph
+  .tab
+    button.tablinks(onclick="tabMenu(event, 'barGraphDiv')", id='barGraphtab') Bar Graph
+    button.tablinks(onclick="tabMenu(event, 'horbarGraphDiv')", id='horbarGraphtab') Horizontal Bar Graph
+    button.tablinks(onclick="tabMenu(event, 'pieGraphDiv')", id='pieGraphtab') Pie Graph
 
-    #barGraphDiv.tabcontent
-    #horbarGraphDiv.tabcontent
-    #pieGraphDiv.tabcontent
-    
-    #twitterDiv  
-    input(type='text', style='display:none;', value=search_hashtag, id='query')
+  #barGraphDiv.tabcontent(style='overflow-x: scroll;')
+  #horbarGraphDiv.tabcontent(style='overflow-x: scroll;')
+  #pieGraphDiv.tabcontent(style='overflow-x: scroll;')
+      
+  #twitterDiv  
+  input(type='text', style='display:none;', value=search_hashtag, id='query')
+
     
   
 
