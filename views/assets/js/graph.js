@@ -2,14 +2,14 @@ function getData(){
   var q = document.getElementById('query').value;
   $.get('/GetQueries?q=' + q, function (data){
     createBarGraph(data);
-    createhorBarGraph(data)
+    createhorBarGraph(data);
     createPieGraph(data);
     });
     loadBarTimer();
 setInterval(function(){
   $.get('/GetQueries?q=' + q, function (data){
     createBarGraph(data);
-    createhorBarGraph(data)
+    createhorBarGraph(data);
     createPieGraph(data);
     });
     //loadBarTimer();
