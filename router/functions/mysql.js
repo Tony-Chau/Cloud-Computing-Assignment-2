@@ -2,10 +2,10 @@ const mysql = require('mysql');
 const tool = require('./tools.js');
 const lowerCase = require('lower-case');
 const mysqlConnection = {
-    dbHost: 'twitterstreamcloudcomputing.heliohost.org',
-    dbDatabase: 'tonychau_twitterstream',
-    dbUser: 'tonychau_manager',
-    dbPassword: 'twitter'
+    dbHost: 'The site is down',
+    dbDatabase: 'its been down like years ago',
+    dbUser: 'That\'s me',
+    dbPassword: 'Why?'
 }
 var con = mysql.createConnection({
     host: mysqlConnection.dbHost,
